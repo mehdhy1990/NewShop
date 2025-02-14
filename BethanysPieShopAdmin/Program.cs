@@ -25,6 +25,12 @@ else
     app.UseDeveloperExceptionPage();
 }
 
+using (var serviceScope = app.Services.CreateScope())
+{
+    var services = serviceScope.ServiceProvider;
+    var context = services.GetRequiredService<PieShopDbContext>();
+    DbInitializer.Seed(context);
+}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
