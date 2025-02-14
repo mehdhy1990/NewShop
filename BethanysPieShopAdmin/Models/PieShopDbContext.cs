@@ -13,4 +13,9 @@ public class PieShopDbContext :DbContext
     public DbSet<Order> Orders { get; set; }
     public DbSet<OrderDetail> OrderDetails { get; set; }
     public DbSet<Pie> Pies { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(PieShopDbContext).Assembly);
+    }
 }
