@@ -1,4 +1,6 @@
-﻿namespace BethanysPieShopAdmin.Models;
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace BethanysPieShopAdmin.Models;
 
 public class CategoryRepository : ICategoryRepository
 {
@@ -8,13 +10,14 @@ public class CategoryRepository : ICategoryRepository
     {
         _context = context;
     }
+
     public IEnumerable<Category> GetAllCategories()
     {
-        throw new NotImplementedException();
+        return _context.Categories.OrderBy(c => c.Name);
     }
 
-    public Task<IEnumerable<Category>> GetAllCategoriesAsync()
+    public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
     {
-        throw new NotImplementedException();
+        return await _context.Categories.OrderBy(c => c.CategoryId).ToListAsync();
     }
 }
